@@ -4,12 +4,12 @@
 #
 Name     : SDL2_ttf
 Version  : 2.0.14
-Release  : 4
+Release  : 5
 URL      : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz
 Source0  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz
 Summary  : Simple DirectMedia Layer - Sample TrueType Font Library
 Group    : Development/Tools
-License  : FTL GPL-2.0
+License  : FTL GPL-2.0 LGPL-2.1 Zlib
 Requires: SDL2_ttf-lib
 BuildRequires : SDL2-dev
 BuildRequires : freetype-dev
@@ -40,14 +40,15 @@ lib components for the SDL2_ttf package.
 
 
 %prep
-cd ..
 %setup -q -n SDL2_ttf-2.0.14
 
 %build
+export LANG=C
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
@@ -63,9 +64,10 @@ rm -rf %{buildroot}
 %files dev
 %defattr(-,root,root,-)
 /usr/include/SDL2/SDL_ttf.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libSDL2_ttf.so
+/usr/lib64/pkgconfig/SDL2_ttf.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libSDL2_ttf-2.0.so.0
+/usr/lib64/libSDL2_ttf-2.0.so.0.14.0
