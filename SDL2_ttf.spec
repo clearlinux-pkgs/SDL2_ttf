@@ -6,7 +6,7 @@
 #
 Name     : SDL2_ttf
 Version  : 2.0.15
-Release  : 14
+Release  : 15
 URL      : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz
 Source0  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz
 Source99 : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz.sig
@@ -44,6 +44,7 @@ Summary: dev components for the SDL2_ttf package.
 Group: Development
 Requires: SDL2_ttf-lib = %{version}-%{release}
 Provides: SDL2_ttf-devel = %{version}-%{release}
+Requires: SDL2_ttf = %{version}-%{release}
 
 %description dev
 dev components for the SDL2_ttf package.
@@ -96,7 +97,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550421562
+export SOURCE_DATE_EPOCH=1550637176
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -123,7 +124,7 @@ cd ../build32;
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1550421562
+export SOURCE_DATE_EPOCH=1550637176
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL2_ttf
 cp COPYING.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/COPYING.txt
