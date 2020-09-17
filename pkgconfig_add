@@ -3,6 +3,4 @@
 ice
 gl
 x11
-32ice
-32gl
-32x11
+sdl2
