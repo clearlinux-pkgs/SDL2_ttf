@@ -1,2 +1,3 @@
+Configure miss: g++ option to enable C++11 features
+Configure miss: necessary GCC -Wno-multichar option
 Configure miss: windres
-Configure miss: linux-gnu-windres

@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x30A59377A7763BE6 (slouken@libsdl.org)
 #
 Name     : SDL2_ttf
-Version  : 2.20.1
-Release  : 21
-URL      : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.1.tar.gz
-Source0  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.1.tar.gz
-Source1  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.1.tar.gz.sig
+Version  : 2.20.2
+Release  : 22
+URL      : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.2.tar.gz
+Source0  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.2.tar.gz
+Source1  : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.20.2.tar.gz.sig
 Summary  : ttf library for Simple DirectMedia Layer with FreeType 2 support
 Group    : Development/Tools
 License  : FTL GPL-2.0 MIT Zlib
@@ -35,6 +35,9 @@ BuildRequires : pkgconfig(icu-uc)
 BuildRequires : pkgconfig(librsvg-2.0)
 BuildRequires : pkgconfig(sdl2)
 BuildRequires : pkgconfig(x11)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 This is HarfBuzz, a text shaping library.
@@ -69,23 +72,23 @@ license components for the SDL2_ttf package.
 
 
 %prep
-%setup -q -n SDL2_ttf-2.20.1
-cd %{_builddir}/SDL2_ttf-2.20.1
+%setup -q -n SDL2_ttf-2.20.2
+cd %{_builddir}/SDL2_ttf-2.20.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1661296876
+export SOURCE_DATE_EPOCH=1675788239
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -97,18 +100,19 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1661296876
+export SOURCE_DATE_EPOCH=1675788239
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/SDL2_ttf
-cp %{_builddir}/SDL2_ttf-%{version}/Xcode/iOS/SDL2.framework/License.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/56855624d497345923d749f17502a18029d72631
-cp %{_builddir}/SDL2_ttf-%{version}/Xcode/macOS/SDL2.framework/Versions/A/Resources/License.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/56855624d497345923d749f17502a18029d72631
-cp %{_builddir}/SDL2_ttf-%{version}/Xcode/pkg-support/resources/FreeType-LICENSE.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/64b7f213ddd72695d94866a1a9532ee5b3a472a8
-cp %{_builddir}/SDL2_ttf-%{version}/Xcode/pkg-support/resources/HarfBuzz-LICENSE.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/18c194fb2b96b6a60289a79265e76976ffdb303d
-cp %{_builddir}/SDL2_ttf-%{version}/Xcode/tvOS/SDL2.framework/License.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/56855624d497345923d749f17502a18029d72631
-cp %{_builddir}/SDL2_ttf-%{version}/external/freetype/LICENSE.TXT %{buildroot}/usr/share/package-licenses/SDL2_ttf/4ddaa192f25581d05cb4d3219d57c1edc76167b7
-cp %{_builddir}/SDL2_ttf-%{version}/external/freetype/docs/GPLv2.TXT %{buildroot}/usr/share/package-licenses/SDL2_ttf/dac7127c82749e3107b53530289e1cd548860868
-cp %{_builddir}/SDL2_ttf-%{version}/external/harfbuzz/COPYING %{buildroot}/usr/share/package-licenses/SDL2_ttf/07f9ad4e387c060c0032e3d02e9ac287ea720785
-cp %{_builddir}/SDL2_ttf-%{version}/external/harfbuzz/src/ms-use/COPYING %{buildroot}/usr/share/package-licenses/SDL2_ttf/689ec0681815ecc32bee639c68e7740add7bd301
+cp %{_builddir}/SDL2_ttf-%{version}/VisualC/external/lib/x64/LICENSE.freetype.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/10f87df634d27140bcdb770be2aeaf2aff11268f || :
+cp %{_builddir}/SDL2_ttf-%{version}/VisualC/external/lib/x64/LICENSE.zlib.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/93dcdae899ba06b5641b49397bc3640b21ce76e6 || :
+cp %{_builddir}/SDL2_ttf-%{version}/VisualC/external/lib/x86/LICENSE.freetype.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/10f87df634d27140bcdb770be2aeaf2aff11268f || :
+cp %{_builddir}/SDL2_ttf-%{version}/VisualC/external/lib/x86/LICENSE.zlib.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/93dcdae899ba06b5641b49397bc3640b21ce76e6 || :
+cp %{_builddir}/SDL2_ttf-%{version}/Xcode/pkg-support/resources/FreeType-LICENSE.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/64b7f213ddd72695d94866a1a9532ee5b3a472a8 || :
+cp %{_builddir}/SDL2_ttf-%{version}/Xcode/pkg-support/resources/HarfBuzz-LICENSE.txt %{buildroot}/usr/share/package-licenses/SDL2_ttf/18c194fb2b96b6a60289a79265e76976ffdb303d || :
+cp %{_builddir}/SDL2_ttf-%{version}/external/freetype/LICENSE.TXT %{buildroot}/usr/share/package-licenses/SDL2_ttf/4ddaa192f25581d05cb4d3219d57c1edc76167b7 || :
+cp %{_builddir}/SDL2_ttf-%{version}/external/freetype/docs/GPLv2.TXT %{buildroot}/usr/share/package-licenses/SDL2_ttf/dac7127c82749e3107b53530289e1cd548860868 || :
+cp %{_builddir}/SDL2_ttf-%{version}/external/harfbuzz/COPYING %{buildroot}/usr/share/package-licenses/SDL2_ttf/07f9ad4e387c060c0032e3d02e9ac287ea720785 || :
+cp %{_builddir}/SDL2_ttf-%{version}/external/harfbuzz/src/ms-use/COPYING %{buildroot}/usr/share/package-licenses/SDL2_ttf/689ec0681815ecc32bee639c68e7740add7bd301 || :
 %make_install
 
 %files
@@ -125,14 +129,15 @@ cp %{_builddir}/SDL2_ttf-%{version}/external/harfbuzz/src/ms-use/COPYING %{build
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libSDL2_ttf-2.0.so.0
-/usr/lib64/libSDL2_ttf-2.0.so.0.2000.1
+/usr/lib64/libSDL2_ttf-2.0.so.0.2000.2
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/SDL2_ttf/07f9ad4e387c060c0032e3d02e9ac287ea720785
+/usr/share/package-licenses/SDL2_ttf/10f87df634d27140bcdb770be2aeaf2aff11268f
 /usr/share/package-licenses/SDL2_ttf/18c194fb2b96b6a60289a79265e76976ffdb303d
 /usr/share/package-licenses/SDL2_ttf/4ddaa192f25581d05cb4d3219d57c1edc76167b7
-/usr/share/package-licenses/SDL2_ttf/56855624d497345923d749f17502a18029d72631
 /usr/share/package-licenses/SDL2_ttf/64b7f213ddd72695d94866a1a9532ee5b3a472a8
 /usr/share/package-licenses/SDL2_ttf/689ec0681815ecc32bee639c68e7740add7bd301
+/usr/share/package-licenses/SDL2_ttf/93dcdae899ba06b5641b49397bc3640b21ce76e6
 /usr/share/package-licenses/SDL2_ttf/dac7127c82749e3107b53530289e1cd548860868
