@@ -73,6 +73,7 @@ libSDL2_ttf-2.0.so.0:TTF_SetDirection
 libSDL2_ttf-2.0.so.0:TTF_SetFontDirection
 libSDL2_ttf-2.0.so.0:TTF_SetFontHinting
 libSDL2_ttf-2.0.so.0:TTF_SetFontKerning
+libSDL2_ttf-2.0.so.0:TTF_SetFontLineSkip
 libSDL2_ttf-2.0.so.0:TTF_SetFontOutline
 libSDL2_ttf-2.0.so.0:TTF_SetFontSDF
 libSDL2_ttf-2.0.so.0:TTF_SetFontScriptName
